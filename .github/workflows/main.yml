@@ -1,4 +1,4 @@
-name: "Build and Push to Server"
+name: "Build and Push to Dockerhub"
 on:
   push:
     branches: [main]
