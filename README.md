@@ -69,8 +69,7 @@ jobs:
 name: "Build and Push to GHCR"
 on:
   push:
-    branches:
-      - ghcr
+    branches: [main]
 
 env:
   working-directroy: ./
@@ -89,8 +88,8 @@ jobs:
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
 
-      - name: 'Build Inventory Image'
+      - name: 'Build and Push Docker Image'
         run: |
-            docker build . --tag ghcr.io/AelElliotBanyard/store:latest
-            docker push ghcr.io/AelElliotBanyard/store:latest
+            docker build ./ref-card-02 --tag ghcr.io/evanlueber/m324_devops:latest
+            docker push ghcr.io/evanlueber/m324_devops:latest
 ```
