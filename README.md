@@ -64,3 +64,33 @@ jobs:
 ## Aufgabe 2
 1. Ich habe eine GitHub Access Token erstellt und habe workflow, write un delete Rechte gegeben.
 ![access token](img/image.png)
+2. Danach habe ich ein GitHub Action erstellt
+```yml
+name: "Build and Push to GHCR"
+on:
+  push:
+    branches:
+      - ghcr
+
+env:
+  working-directroy: ./
+
+jobs:
+  GHCR:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+        
+      - name: 'Login to GitHub Container Registry'
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+
+      - name: 'Build Inventory Image'
+        run: |
+            docker build . --tag ghcr.io/AelElliotBanyard/store:latest
+            docker push ghcr.io/AelElliotBanyard/store:latest
+```
