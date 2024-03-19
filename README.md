@@ -7,8 +7,8 @@
 ```Dockerfile
 FROM node:latest
 WORKDIR /app
-RUN git clone https://github.com/evanlueber/324_devops.git
-WORKDIR /app/324_devops/aufgabe1
+RUN git clone https://github.com/evanlueber/m324_devops.git
+WORKDIR /app/m324_devops/aufgabe1
 EXPOSE 3000
 ENTRYPOINT ["npm", "run", "start"]
 ```
@@ -60,3 +60,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 ```
 7. Danach habe ich auf Github in meinem Repository ein Secret erstellt, in dem ich meine Docker-Hub Anmeldedaten hinterlegt habe.
+
+## Aufgabe 2
+1. Ich habe eine GitHub Access Token erstellt und habe workflow, write un delete Rechte gegeben.
+![access token](img/image.png)
