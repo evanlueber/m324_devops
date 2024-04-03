@@ -59,6 +59,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 ```
+![main](img/mainjob.png)
 7. Danach habe ich auf Github in meinem Repository ein Secret erstellt, in dem ich meine Docker-Hub Anmeldedaten hinterlegt habe.
 
 ## Aufgabe 2
@@ -95,4 +96,58 @@ jobs:
         run: |
             docker build ./ref-card-02 --tag ghcr.io/evanlueber/m324_devops:latest
             docker push ghcr.io/evanlueber/m324_devops:latest
+```
+![ghcr](img/ghcrjob.png)
+
+## Aufgabe ECR
+1. Ich habe den Befehl für das erstellen eines ECR Repository ausgeführt.
+```bash
+aws ecr create-repository \
+    --repository-name ecr-devops \
+    --region us-east-1
+```
+2. Ich habe Environmentvariabeln für das ECR Repository erstellt.
+3. Ich habe ein GitHub Action erstellt, das ich von GitHub Actions Anleitung habe.
+```yml
+name: Deploy to Amazon ECS
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AWS_REGION: MY_AWS_REGION
+  ECR_REPOSITORY: MY_ECR_REPOSITORY
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 ```
