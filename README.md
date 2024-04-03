@@ -108,6 +108,8 @@ aws ecr create-repository \
 ```
 2. Ich habe Environmentvariabeln für das ECR Repository erstellt.
 3. Ich habe ein GitHub Action erstellt, das ich von GitHub Actions Anleitung habe.
+4. Ich habe den AWS_SESSION_TOKEN Secret dem yaml hinzugefügt
+5. Ich habe Secrets für die AWS Access Keys erstellt.
 ```yml
 name: Deploy to Amazon ECS
 
