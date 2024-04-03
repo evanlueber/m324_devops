@@ -160,3 +160,4 @@ jobs:
 2. Ich habe ein Cluster erstellt.
 ![cluster](img/cluster.png)
 3. Danach habe ich einen Service in diesem Cluster erstellt.
+![service](img/service.png)

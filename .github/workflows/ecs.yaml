@@ -11,7 +11,7 @@ env:
   ECS_SERVICE: m324devops-s
   ECS_CLUSTER: m324-devops
   ECS_TASK_DEFINITION: m324devopslueber
-  CONTAINER_NAME: ecr-devops
+  CONTAINER_NAME: ecr_devops
 
 jobs:
   deploy:
