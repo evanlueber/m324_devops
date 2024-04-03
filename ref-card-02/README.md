@@ -1,4 +1,3 @@
-
 # Architecture Ref.Card 02 - React Application (serverless)
 
 Link zur Übersicht<br/>
@@ -43,6 +42,3 @@ Die App kann nun im Browser unter der URL http://localhost:3000 betrachtet werde
 
 ### Inbetriebnahme mit Docker Container
 folgt...
-
-
-

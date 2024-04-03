@@ -153,3 +153,10 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 ```
+
+## Aufgabe ECS
+1. Ich habe eine Taskdefinition erstellt und habe die ECR Repository URI hinzugefügt und den Port angepasst.
+![task](img/task.png) 
+2. Ich habe ein Cluster erstellt.
+![cluster](img/cluster.png)
+3. Danach habe ich einen Service in diesem Cluster erstellt.
