@@ -3,12 +3,12 @@ name: Deploy to Amazon ECS
 on:
   push:
     branches:
-      - ecs
+      - main
 
 env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: ecr-devops
-  ECS_SERVICE: m324devopslueber
+  ECS_SERVICE: m324devops-s
   ECS_CLUSTER: m324-devops
   ECS_TASK_DEFINITION: m324devopslueber
   CONTAINER_NAME: ecr-devops
